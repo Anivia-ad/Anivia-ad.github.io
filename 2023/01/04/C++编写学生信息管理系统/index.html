@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Zephyr">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/01/04/c++编写学生信息管理系统/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="前言这个是我的一个大作业，记录下这个大作业的源代码。 题目要求1.功能内容必须包含以下内容： ​	对记录进行增加、删除、查询、修改、浏览等操作。 2.编程使用的技术必须包含以下C++语言知识点： ​	(1)  变量的使用 ​	(2)  if语句 ​	(3)  switch case分支语句的使用 ​	(4)  循环结构 ​	(5)  函数定义及调用 ​	(6)  类的定义及用法 代码缺点：因为本人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++编写学生信息管理系统">
+<meta property="og:url" content="http://example.com/2023/01/04/C++%E7%BC%96%E5%86%99%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言这个是我的一个大作业，记录下这个大作业的源代码。 题目要求1.功能内容必须包含以下内容： ​	对记录进行增加、删除、查询、修改、浏览等操作。 2.编程使用的技术必须包含以下C++语言知识点： ​	(1)  变量的使用 ​	(2)  if语句 ​	(3)  switch case分支语句的使用 ​	(4)  循环结构 ​	(5)  函数定义及调用 ​	(6)  类的定义及用法 代码缺点：因为本人">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041745520.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041840614.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041841424.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041842926.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041843903.png">
+<meta property="article:published_time" content="2023-01-04T11:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T05:33:25.744Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="学生信息管理系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041745520.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/snowflake-solid.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/snowflake-solid.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/snowflake-solid.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            C++编写学生信息管理系统 -
+        
+        在下灵风
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <script data-swup-reload-script src="/js/weather.js"></script>
+                
+    
+            
+                
+                    <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                在下灵风
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        ARCHIVES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                ARCHIVES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                
+                
+                <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041910707.png" alt="C++编写学生信息管理系统" class="max-w-none"/>
+                
+                <h1 class="article-title-cover">C++编写学生信息管理系统</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="http://p1.music.126.net/QIvd2mKGXAkAvjjumhwu0g==/109951163092524792.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Zephyr</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-01-04 19:00</span>
+        <span class="mobile">2023-01-04 19:00</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-03-13 13:33:25</span>
+            <span class="mobile">2023-03-13 13:33:25</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">学生信息管理系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个是我的一个大作业，记录下这个大作业的源代码。</p>
+<h1 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h1><p>1.功能内容必须包含以下内容：</p>
+<p>​	对记录进行<u>增加、删除、查询、修改、浏览</u>等操作。</p>
+<p>2.编程使用的技术必须包含以下C++语言知识点：</p>
+<p>​	(1)  变量的使用</p>
+<p>​	(2)  if语句</p>
+<p>​	(3)  switch case分支语句的使用</p>
+<p>​	(4)  循环结构</p>
+<p>​	(5)  函数定义及调用</p>
+<p>​	(6)  类的定义及用法</p>
+<h1 id="代码缺点："><a href="#代码缺点：" class="headerlink" title="代码缺点："></a>代码缺点：</h1><p>因为本人技术问题，添加学生信息后就只是一次性的，并没有储存道本地，所以一旦关闭系统后所添加的信息都会消失。</p>
+<h1 id="交互界面截图："><a href="#交互界面截图：" class="headerlink" title="交互界面截图："></a>交互界面截图：</h1><h3 id="1-主界面："><a href="#1-主界面：" class="headerlink" title="1.主界面："></a>1.主界面：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041745520.png"
+                     
+                ></p>
+<h3 id="2-添加学生信息："><a href="#2-添加学生信息：" class="headerlink" title="2.添加学生信息："></a>2.添加学生信息：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041840614.png"
+                     
+                ></p>
+<h3 id="3-查询学生信息："><a href="#3-查询学生信息：" class="headerlink" title="3.查询学生信息："></a>3.查询学生信息：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041841424.png"
+                     
+                ></p>
+<h4 id="（1）查询结果："><a href="#（1）查询结果：" class="headerlink" title="（1）查询结果："></a>（1）查询结果：</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041842926.png"
+                     
+                ></p>
+<h3 id="4-修改学生信息："><a href="#4-修改学生信息：" class="headerlink" title="4.修改学生信息："></a>4.修改学生信息：</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041843903.png"
+                     
+                ></p>
+<h1 id="我搓的代码"><a href="#我搓的代码" class="headerlink" title="我搓的代码"></a>我搓的代码</h1><div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;iostream&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;string&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> M 60</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string num;</span><br><span class="line">    std::string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    std::string sex;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Student</span><span class="params">(std::string =<span class="string">&quot;&quot;</span>,std::string =<span class="string">&quot;&quot;</span>,<span class="type">int</span> = <span class="number">10</span>,std::string = <span class="string">&quot;男&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function">std::string <span class="title">getNum</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">std::string <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setName</span><span class="params">(std::string n)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setSex</span><span class="params">(<span class="type">char</span> s)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setAge</span><span class="params">(<span class="type">int</span> a)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setNum</span><span class="params">(std::string u)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addStudent</span><span class="params">(Student *s ,<span class="type">int</span> &amp;count)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteStudent</span><span class="params">(Student *s ,<span class="type">int</span> &amp;count)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">updateStudent</span><span class="params">(Student *s ,<span class="type">int</span> count)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">searchStudent</span><span class="params">(Student *s ,<span class="type">int</span> count)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">menu</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">Student::<span class="built_in">Student</span>(std::string n1,std::string n2,<span class="type">int</span> a,std::string s)</span><br><span class="line">&#123;</span><br><span class="line">    age = a;</span><br><span class="line">    num = std::<span class="built_in">move</span>(n1);</span><br><span class="line">    name = std::<span class="built_in">move</span>(n2);</span><br><span class="line">    sex = std::<span class="built_in">move</span>(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student::print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;学生名字：&quot;</span> &lt;&lt; name &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; <span class="string">&quot;学号：&quot;</span> &lt;&lt; num &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; age &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; <span class="string">&quot;性别：&quot;</span> &lt;&lt; sex &lt;&lt; <span class="string">&quot;  &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student::setNum</span><span class="params">(std::string u)</span> </span>&#123;num = std::<span class="built_in">move</span>(u);&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student::setName</span><span class="params">(std::string n)</span> </span>&#123;name=std::<span class="built_in">move</span>(n);&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student::setAge</span><span class="params">(<span class="type">int</span> a)</span> </span>&#123;age = a;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Student::setSex</span><span class="params">(<span class="type">char</span> s)</span> </span>&#123;sex=s;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">Student::getName</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> name;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">Student::getNum</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> num;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">menu</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">    std::cout&lt;&lt; <span class="string">&quot;             六年级二班学生信息系统               &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot; 1.添加学生信息             2.查询学生信息       &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot; 3.修改学生信息             4.删除学生信息       &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;                  0.退出系统                    &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;           请输入0-4进行相应操作                  &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    std::cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addStudent</span><span class="params">(Student *s,<span class="type">int</span> &amp;count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    std::string num,name;</span><br><span class="line">    std::string sex;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入学生信息：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;学生姓名：&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; name;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;学号:&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; num;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;性别:&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; sex;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;年龄：&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; age;</span><br><span class="line">    s[count]=<span class="built_in">Student</span>(num,name,age,sex);</span><br><span class="line">    count++;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;添加成功&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteStudent</span><span class="params">(Student *s,<span class="type">int</span> &amp;count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i, j, flag;</span><br><span class="line">    <span class="type">char</span> ch;</span><br><span class="line">    flag = <span class="number">0</span>;</span><br><span class="line">    std::string newname;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入删除姓名：&quot;</span>;</span><br><span class="line">    std::cin &gt;&gt; newname;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i].<span class="built_in">getName</span>() == newname) &#123;</span><br><span class="line">            flag = <span class="number">1</span>;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;学号：&quot;</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; std::endl;</span><br><span class="line">            s[i].<span class="built_in">print</span>();</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot; 确认是否进行删除，请输入y/n.&quot;</span>;</span><br><span class="line">            std::cin &gt;&gt; ch;</span><br><span class="line">            <span class="keyword">if</span> (ch == <span class="string">&#x27;y&#x27;</span> || ch == <span class="string">&#x27;Y&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (j=i+<span class="number">1</span>; j&lt;count; j++)</span><br><span class="line">                    s[j<span class="number">-1</span>] = s[j];</span><br><span class="line">                count--;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;删除成功&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;放弃本次删除操作&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag == <span class="number">0</span>) &#123;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;不存在符合条件的学生信息！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">updateStudent</span><span class="params">(Student *s,<span class="type">int</span> count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i,type;</span><br><span class="line">    std::string num;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请输入修改学生学号：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cin &gt;&gt; num;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; count &amp;&amp; (s[i].<span class="built_in">getNum</span>()!= num); i++);</span><br><span class="line">    <span class="keyword">if</span> (i &lt; count )</span><br><span class="line">    &#123;</span><br><span class="line">        s[i].<span class="built_in">print</span>();</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;                                              &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;   1.姓名                      2.学号          &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;   3.性别                      4.年龄          &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;                 0.返回                        &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;          请输入相应编号做相应修改。                &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;                                              &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; type;</span><br><span class="line">        <span class="keyword">switch</span> (type)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                std::string newname;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;请输入新的姓名：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                std::cin &gt;&gt; newname;</span><br><span class="line">                s[i].<span class="built_in">setName</span>(newname);</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;修改成功&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                std::string newnum;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;请输入新的学号：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                std::cin &gt;&gt; newnum;</span><br><span class="line">                s[i].<span class="built_in">setNum</span>(newnum);</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;修改成功&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">char</span> newsex;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;请输入新的性别(F:女 f:男):&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                std::cin &gt;&gt; newsex;</span><br><span class="line">                s[i].<span class="built_in">setSex</span>(newsex);</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;修改成功&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> newage;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;请输入新的年龄：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                std::cin &gt;&gt; newage;</span><br><span class="line">                s[i].<span class="built_in">setAge</span>(newage);</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;修改成功&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;输入错误&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> std::cout &lt;&lt; <span class="string">&quot;不存在符合条件的学生记录&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">searchStudent</span><span class="params">(Student *s,<span class="type">int</span> count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> type,flag;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;        1.按姓名查询           2.按学号查询       &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;                     0.返回                       &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;                   请输入0至2                     &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        std::cin &gt;&gt; type;</span><br><span class="line">        <span class="keyword">switch</span> (type)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                std::string newname;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;请查询输入姓名:&quot;</span>;</span><br><span class="line">                std::cin &gt;&gt; newname;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (s[i].<span class="built_in">getName</span>() == newname)</span><br><span class="line">                    &#123;</span><br><span class="line">                        s[i].<span class="built_in">print</span>();</span><br><span class="line">                        flag = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (flag == <span class="number">0</span>)</span><br><span class="line">                    std::cout &lt;&lt; <span class="string">&quot;不存在符合条件的学生&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            &#123;</span><br><span class="line">                std::string newnum;</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;请输入学号：&quot;</span>;</span><br><span class="line">                std::cin &gt;&gt; newnum;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count ;i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (s[i].<span class="built_in">getNum</span>() == newnum)</span><br><span class="line">                    &#123;</span><br><span class="line">                        s[i].<span class="built_in">print</span>();</span><br><span class="line">                        flag = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (flag == <span class="number">0</span>)</span><br><span class="line">                    std::cout &lt;&lt; <span class="string">&quot;不存在符合条件的学生&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>: std::cout &lt;&lt; <span class="string">&quot;输入错误 &quot;</span> &lt;&lt; std::endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Student s[M];</span><br><span class="line">    <span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span>(<span class="built_in">menu</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">addStudent</span>(s,count);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">searchStudent</span>(s,count);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">updateStudent</span>(s,count);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="built_in">deleteStudent</span>(s,count);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                std::cout &lt;&lt; <span class="string">&quot;输入错误，请重新输入！&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>文章更新：</p>
+<p>时间：2023年2月13日18点10分</p>
+<p>卧槽，刚才让chatGPT写我的C++大作业。代码写的比我好几百倍 ，代码原本是用结构体，我把结构体换成类再作修改就符合题目要求，且使用效果更好。代码写的比我好几百倍，看的我人都傻了，让我大受震撼。主要是代码里对vector和Range-based for loop的使用能够大大简化代码（相对于我写的）。简化内存管理、提高代码效率、提供高效的插入和删除操作，并且易于使用和理解。</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> age&#123;<span class="string">&#x27;0&#x27;</span>&#125;,num&#123;<span class="string">&#x27;0&#x27;</span>&#125;;</span><br><span class="line">    string gender;</span><br><span class="line">    string address;</span><br><span class="line">&#125;;</span><br><span class="line">vector&lt;Student&gt; students;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">addStudent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Student student;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入学生姓名：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; student.name;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入学生学号：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; student.num;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入学生年龄：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; student.age;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入学生性别：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; student.gender;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入学生地址：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; student.address;</span><br><span class="line">    students.<span class="built_in">push_back</span>(student);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;添加成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">deleteStudent</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">    <span class="type">char</span> ch;</span><br><span class="line">    string name;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入要删除的学生姓名：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; name;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; students.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (students[i].name == name)&#123;</span><br><span class="line">            flag = <span class="literal">true</span>;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;确认是否进行删除，请输入y/n.&quot;</span>;</span><br><span class="line">            cin &gt;&gt; ch;</span><br><span class="line">            <span class="keyword">if</span> (ch == <span class="string">&#x27;y&#x27;</span> || ch == <span class="string">&#x27;Y&#x27;</span>)&#123;</span><br><span class="line">                students.<span class="built_in">erase</span>(students.<span class="built_in">begin</span>() + i);</span><br><span class="line">                cout &lt;&lt; <span class="string">&quot;删除成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                cout &lt;&lt; <span class="string">&quot;放弃本次删除操作&quot;</span> &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!flag)&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;未找到该学生！&quot;</span> &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modifyStudent</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> type;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入要修改的学生姓名：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; name;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp; student : students)&#123;</span><br><span class="line">        <span class="keyword">if</span> (student.name == name)&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;   1.姓名                      2.学号          &quot;</span> &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;   3.性别                      4.年龄          &quot;</span> &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;   5.地址                      0.返回          &quot;</span> &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;          请输入相应编号做相应修改。                &quot;</span> &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; endl;</span><br><span class="line">            cin &gt;&gt; type;</span><br><span class="line">            <span class="keyword">switch</span> (type)&#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>:&#123;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;请输入学生新的姓名：&quot;</span>;</span><br><span class="line">                    cin &gt;&gt; student.name;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;修改成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>:&#123;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;请输入学生新的学号：&quot;</span>;</span><br><span class="line">                    cin &gt;&gt;student.num;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;修改成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>:&#123;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;请输入学生新的性别：&quot;</span>;</span><br><span class="line">                    cin &gt;&gt; student.gender;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;修改成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">4</span>:&#123;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;请输入学生新的年龄：&quot;</span>;</span><br><span class="line">                    cin &gt;&gt; student.age;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;修改成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">5</span>:&#123;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;请输入学生新的地址：&quot;</span>;</span><br><span class="line">                    cin &gt;&gt; student.address;</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;修改成功！&quot;</span> &lt;&lt; endl;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">0</span>:&#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    cout &lt;&lt; <span class="string">&quot;输入错误&quot;</span> &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;未找到您所输入的学生。&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">queryStudent</span><span class="params">()</span></span>&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入要查询的学生姓名：&quot;</span>;</span><br><span class="line">    cin &gt;&gt; name;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp; student : students)&#123;</span><br><span class="line">        <span class="keyword">if</span> (student.name == name)&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;姓名：&quot;</span> &lt;&lt; student.name &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;年龄：&quot;</span> &lt;&lt; student.age &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;学号：&quot;</span> &lt;&lt; student.num &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;性别：&quot;</span> &lt;&lt; student.gender &lt;&lt; endl;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;地址：&quot;</span> &lt;&lt; student.address &lt;&lt; endl;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;未找到该学生！&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;             六年级二班学生信息系统               &quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;    1.添加学生信息             2.删除学生信息      &quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;    3.修改学生信息             4.查询学生信息       &quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;                  0.退出系统                    &quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;            请输入相应编号做相应修改。             &quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;-----------------------------------------------&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="type">int</span> n;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line">        <span class="keyword">switch</span> (n)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="built_in">addStudent</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                <span class="built_in">deleteStudent</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                <span class="built_in">modifyStudent</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="built_in">queryStudent</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                cout &lt;&lt; <span class="string">&quot;输入错误！&quot;</span> &lt;&lt; endl;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> C++编写学生信息管理系统</li>
+        <li><strong>Author:</strong> Zephyr</li>
+        <li><strong>Created at
+                :</strong> 2023-01-04 19:00:00</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2023-03-13 13:33:25
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/01/04/C++编写学生信息管理系统/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+            This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/C/">#C++</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">#学生信息管理系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">解决有关很久没更新后使用hexo s报错的问题</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2022/10/22/Adobe%E8%BD%AF%E4%BB%B62023%E7%89%B9%E5%88%AB%E7%89%88/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Adobe软件2023特别版</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">C++编写学生信息管理系统</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E8%A6%81%E6%B1%82"><span class="nav-text">题目要求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%BA%E7%82%B9%EF%BC%9A"><span class="nav-text">代码缺点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E7%95%8C%E9%9D%A2%E6%88%AA%E5%9B%BE%EF%BC%9A"><span class="nav-text">交互界面截图：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%BB%E7%95%8C%E9%9D%A2%EF%BC%9A"><span class="nav-text">1.主界面：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-text">2.添加学生信息：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9F%A5%E8%AF%A2%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-text">3.查询学生信息：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BF%AE%E6%94%B9%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="nav-text">4.修改学生信息：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E6%90%93%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="nav-text">我搓的代码</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+                
+        
+                
+        
+                
+
+                    
+                        <script data-swup-reload-script src="/js/weather.js"></script>
+                    
+        
+                
+
+                    
+                        <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                    
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+<div id="he-plugin-simple"></div>
+<script>
+WIDGET = {"CONFIG":{"modules":"01234","background":"1","tmpColor":"FFFFFF","tmpSize":"16","cityColor":"FFFFFF","citySize":"16","aqiColor":"FFFFFF","aqiSize":"16","weatherIconSize":"24","alertIconSize":"18","padding":"10px 10px 10px 10px","shadow":"0","language":"auto","borderRadius":"15","fixed":"false","vertical":"top","horizontal":"left","key":"df33a79e19aa4ea3988d05594c7015cf"}}
+</script>
+<script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

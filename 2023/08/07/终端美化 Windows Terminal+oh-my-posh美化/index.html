@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Zephyr">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/08/07/终端美化 windows terminal+oh-my-posh美化/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="最终效果图: 步骤1 – 下载Windows Terminal​		在Microsoft Store搜索并下载Windows Terminal。（Windows Terminal Preview也可以）  ​	 步骤2 – 设置Windows Terminal json 配置文件​	   1.	按照以下顺序打开JSON配置文件   配置JSON配置文件 在”defaults”:{ },里面按照图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows终端美化 -- Windows Terminal + oh-my-posh">
+<meta property="og:url" content="http://example.com/2023/08/07/%E7%BB%88%E7%AB%AF%E7%BE%8E%E5%8C%96%20Windows%20Terminal+oh-my-posh%E7%BE%8E%E5%8C%96/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最终效果图: 步骤1 – 下载Windows Terminal​		在Microsoft Store搜索并下载Windows Terminal。（Windows Terminal Preview也可以）  ​	 步骤2 – 设置Windows Terminal json 配置文件​	   1.	按照以下顺序打开JSON配置文件   配置JSON配置文件 在”defaults”:{ },里面按照图片">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071554515.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071601325.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071607778.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071610413.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071633059.png">
+<meta property="article:published_time" content="2023-08-07T07:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-07T08:55:29.389Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Windows Terminal">
+<meta property="article:tag" content="oh-my-posh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071554515.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/snowflake-solid.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/snowflake-solid.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/snowflake-solid.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Windows终端美化 -- Windows Terminal + oh-my-posh -
+        
+        在下灵风
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <script data-swup-reload-script src="/js/weather.js"></script>
+                
+    
+            
+                
+                    <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                在下灵风
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        ARCHIVES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                ARCHIVES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                
+                
+                <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071545164.png" alt="Windows终端美化 -- Windows Terminal + oh-my-posh" class="max-w-none"/>
+                
+                <h1 class="article-title-cover">Windows终端美化 -- Windows Terminal + oh-my-posh</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="http://p1.music.126.net/QIvd2mKGXAkAvjjumhwu0g==/109951163092524792.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Zephyr</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-07 15:00</span>
+        <span class="mobile">2023-08-07 15:00</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-08-07 16:55:29</span>
+            <span class="mobile">2023-08-07 16:55:29</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Windows-Terminal/">Windows Terminal</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/oh-my-posh/">oh-my-posh</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p>最终效果图:<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071554515.png"
+                     
+                ></p>
+<h1 id="步骤1-–-下载Windows-Terminal"><a href="#步骤1-–-下载Windows-Terminal" class="headerlink" title="步骤1 – 下载Windows Terminal"></a>步骤1 – 下载Windows Terminal</h1><p>​		在Microsoft Store搜索并下载<strong>Windows Terminal</strong>。（Windows Terminal Preview也可以）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071601325.png"
+                     
+                ></p>
+<p>​	</p>
+<h2 id="步骤2-–-设置Windows-Terminal-json-配置文件"><a href="#步骤2-–-设置Windows-Terminal-json-配置文件" class="headerlink" title="步骤2 – 设置Windows Terminal json 配置文件"></a>步骤2 – 设置Windows Terminal json 配置文件</h2><p>​	   1.	按照以下顺序打开JSON配置文件</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071607778.png"
+                     
+                ></p>
+<ol start="2">
+<li><p>配置JSON配置文件</p>
+<p>在”defaults”:{ },里面按照图片里的设置。至于数值则按照自己个人喜好进行配置。</p>
+<p> Ⅰ  Opacity 是终端背景透明度设置 ，0是完全不透明；100是完全透明</p>
+<p>Ⅱ   useAcrylic 是开启亚克力样式</p>
+<p>Ⅲ   fontFace 是所显示的字体</p>
+<p>​		（最好使用Nerd Font ，以防后面字体乱码，至于使用什么Nerd Font ，按照自己个人喜好选择</p>
+<p>​			Nerd Fonts下载地址：<a class="link"   target="_blank" rel="noopener" href="https://www.nerdfonts.com/font-downloads" >https://www.nerdfonts.com/font-downloads <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> ）</p>
+<p>Ⅳ   fontSize 是字体大小</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071610413.png"
+                     
+                ></p>
+</li>
+</ol>
+<p>​			记得保存修改，回到终端设置界面，点击“保存”按钮， 随后你就能看到透明效果了。</p>
+<h1 id="步骤3-–-安装oh-my-posh"><a href="#步骤3-–-安装oh-my-posh" class="headerlink" title="步骤3 – 安装oh my posh"></a>步骤3 – 安装oh my posh</h1><p> 注意：假设你已经安装了winget，这里使用winget安装oh my posh</p>
+<p>​	 		在终端界面里输入下面指令来安装oh my posh</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install oh-my-posh</span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>1分钟后可能会显示以下信息：</p>
+<p>找到多个与输入条件匹配的程序包。请修改输入。 </p>
+<p>名称       			ID                     				      源 </p>
+<p>oh-my-posh 	XP8K0HKJFRXGCK          		msstore </p>
+<p>Oh My Posh     JanDeDobbeleer.OhMyPosh   winget</p>
+<p>我们这里选择下载安装第二个，输入以下指令  (当然 ，你也可以选择第一个，就是后面安装过程可能和本文不一样)</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install JanDeDobbeleer.OhMyPosh</span><br></pre></td></tr></table></figure></div>
+
+<p>后面 可能要你同意协议，同意就好。</p>
+<h1 id="步骤4-–-修改启动脚本"><a href="#步骤4-–-修改启动脚本" class="headerlink" title="步骤4 – 修改启动脚本"></a>步骤4 – 修改启动脚本</h1><p>​		1. 如果你已安装了VS Code，只需要在终端输入第一个指令，否则只需要输入第二个指令</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code $PROFILE</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">notepad $PROFILE</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><p>在打开的PROFILE里输入以下代码</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\montys.omp.json| Invoke-Expression</span><br></pre></td></tr></table></figure></div>
+
+<p>注意：<em>montys.omp.json</em> 是主题文件，按照个人喜好进行选择 ，</p>
+<p>​			所有可以选择的主题文件 在<strong>C:\Users\你的Windows账户\AppData\Local\Programs\oh-my-posh\themes</strong></p>
+<p>最后保存文件，重新打开Windows Terminal 。</p>
+<p>至此，已成功美化Windows Terminal 。</p>
+</li>
+</ol>
+<h1 id="附"><a href="#附" class="headerlink" title="附"></a>附</h1><p> 如果不喜欢每次打开终端所显示的信息，如下图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071633059.png"
+                     
+                ></p>
+<p>可以在步骤4所打开的启动脚本里加多一行代码：<code>cls </code> ，就可以在每次打开终端时自动去除该信息。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> Windows终端美化 -- Windows Terminal + oh-my-posh</li>
+        <li><strong>Author:</strong> Zephyr</li>
+        <li><strong>Created at
+                :</strong> 2023-08-07 15:00:00</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2023-08-07 16:55:29
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/08/07/终端美化 Windows Terminal+oh-my-posh美化/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+            This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Windows-Terminal/">#Windows Terminal</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/oh-my-posh/">#oh-my-posh</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/06/23/C++%E7%BB%83%E6%89%8B--%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">对于动,静态数组使用的一些小思考</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">Windows终端美化 -- Windows Terminal + oh-my-posh</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A41-%E2%80%93-%E4%B8%8B%E8%BD%BDWindows-Terminal"><span class="nav-text">步骤1 – 下载Windows Terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A42-%E2%80%93-%E8%AE%BE%E7%BD%AEWindows-Terminal-json-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">步骤2 – 设置Windows Terminal json 配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A43-%E2%80%93-%E5%AE%89%E8%A3%85oh-my-posh"><span class="nav-text">步骤3 – 安装oh my posh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A44-%E2%80%93-%E4%BF%AE%E6%94%B9%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC"><span class="nav-text">步骤4 – 修改启动脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84"><span class="nav-text">附</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+                
+        
+                
+        
+                
+
+                    
+                        <script data-swup-reload-script src="/js/weather.js"></script>
+                    
+        
+                
+
+                    
+                        <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                    
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+<div id="he-plugin-simple"></div>
+<script>
+WIDGET = {"CONFIG":{"modules":"01234","background":"1","tmpColor":"FFFFFF","tmpSize":"16","cityColor":"FFFFFF","citySize":"16","aqiColor":"FFFFFF","aqiSize":"16","weatherIconSize":"24","alertIconSize":"18","padding":"10px 10px 10px 10px","shadow":"0","language":"auto","borderRadius":"15","fixed":"false","vertical":"top","horizontal":"left","key":"df33a79e19aa4ea3988d05594c7015cf"}}
+</script>
+<script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

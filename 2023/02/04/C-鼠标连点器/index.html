@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Zephyr">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://example.com/2023/02/04/c-鼠标连点器/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="前几天LOL PBE 出现了BUG，可以无限刷宝箱。但是要鼠标连续4下才能刷到。于是我就想到用鼠标连点器来自动刷。 经过几次搜索，我在知乎上找到了能够自己设定鼠标坐标的连点器，我稍微修改了一下。 最后，我也成功刷了1W多个宝箱。  下面是原代码 12345678910111213141516171819202122232425262728293031323334353637383940414243">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++鼠标连点器">
+<meta property="og:url" content="http://example.com/2023/02/04/C-%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前几天LOL PBE 出现了BUG，可以无限刷宝箱。但是要鼠标连续4下才能刷到。于是我就想到用鼠标连点器来自动刷。 经过几次搜索，我在知乎上找到了能够自己设定鼠标坐标的连点器，我稍微修改了一下。 最后，我也成功刷了1W多个宝箱。  下面是原代码 12345678910111213141516171819202122232425262728293031323334353637383940414243">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041712343.png">
+<meta property="og:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041718546.png">
+<meta property="article:published_time" content="2023-02-04T10:02:10.000Z">
+<meta property="article:modified_time" content="2023-02-26T08:25:49.545Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="鼠标连点器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041712343.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/snowflake-solid.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/snowflake-solid.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/snowflake-solid.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            C++鼠标连点器 -
+        
+        在下灵风
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/css/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+    <!--- Font Part-->
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+        
+            
+    
+            
+    
+            
+                
+                    <script data-swup-reload-script src="/js/weather.js"></script>
+                
+    
+            
+                
+                    <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"example.com","root":"/","language":"en"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.4.4","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
+    Global.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+    Global.data_config = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="swup-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="http://example.com/">
+                
+                在下灵风
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        HOME
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/archives"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-archive"></i>
+                                        
+                                        ARCHIVES
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
+        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                HOME
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+                
+                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
+                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
+                        href="/archives"  >
+                             
+                                
+                                    <i class="fa-regular fa-archive"></i>
+                                
+                                ARCHIVES
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                
+                
+                <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041804011.png" alt="C++鼠标连点器" class="max-w-none"/>
+                
+                <h1 class="article-title-cover">C++鼠标连点器</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="http://p1.music.126.net/QIvd2mKGXAkAvjjumhwu0g==/109951163092524792.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Zephyr</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-02-04 18:02:10</span>
+        <span class="mobile">2023-02-04 18:02:10</span>
+        <span class="hover-info">Created</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-02-26 16:25:49</span>
+            <span class="mobile">2023-02-26 16:25:49</span>
+            <span class="hover-info">Updated</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/C/">C++</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/">鼠标连点器</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p>前几天LOL PBE 出现了BUG，可以无限刷宝箱。但是要鼠标连续4下才能刷到。于是我就想到用鼠标连点器来自动刷。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041712343.png"
+                     
+                ></p>
+<p>经过几次搜索，我在知乎上找到了能够自己设定鼠标坐标的连点器，我稍微修改了一下。</p>
+<p>最后，我也成功刷了1W多个宝箱。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041718546.png"
+                     
+                ></p>
+<p>下面是原代码</p>
+<div class="highlight-container" data-rel="C++"><figure class="iseeu highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;iostream&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;conio.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;ctime&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;vector&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;string&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;windows.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">set_cursor</span><span class="params">(<span class="type">bool</span> hide)</span></span>&#123;</span><br><span class="line">    HANDLE handle = <span class="built_in">GetStdHandle</span>(STD_OUTPUT_HANDLE);</span><br><span class="line">    CONSOLE_CURSOR_INFO CursorInfo;</span><br><span class="line">    <span class="built_in">GetConsoleCursorInfo</span>(handle, &amp;CursorInfo);</span><br><span class="line">    CursorInfo.bVisible = hide;</span><br><span class="line">    <span class="built_in">SetConsoleCursorInfo</span>(handle, &amp;CursorInfo);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">gotoxy</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">    COORD c = &#123;(SHORT)x, (SHORT)y&#125;;</span><br><span class="line">    <span class="built_in">SetConsoleCursorPosition</span>(<span class="built_in">GetStdHandle</span>(STD_OUTPUT_HANDLE), c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setmode</span><span class="params">()</span></span>&#123;</span><br><span class="line">    HANDLE hStdin = <span class="built_in">GetStdHandle</span>(STD_INPUT_HANDLE);</span><br><span class="line">    DWORD mode;</span><br><span class="line">    <span class="built_in">GetConsoleMode</span>(hStdin, &amp;mode);</span><br><span class="line">    mode &amp;= ~ENABLE_QUICK_EDIT_MODE;</span><br><span class="line">    <span class="built_in">SetConsoleMode</span>(hStdin, mode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Click</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> x, y;</span><br><span class="line">    <span class="type">int</span> delay;</span><br><span class="line">    <span class="type">int</span> button_down, button_up;</span><br><span class="line">    std::string msg;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">setmode</span>();</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;欢迎使用鼠标连点器。\n\n&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    _ReStart_:</span><br><span class="line">    std::<span class="built_in">system</span>(<span class="string">&quot;mode con cols=40 lines=15&quot;</span>);</span><br><span class="line">    <span class="built_in">set_cursor</span>(<span class="literal">true</span>);</span><br><span class="line">    <span class="built_in">SetWindowPos</span>(<span class="built_in">GetConsoleWindow</span>(), HWND_TOPMOST, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, SWP_NOMOVE | SWP_NOSIZE);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;请选择模式：\n&quot;</span> &lt;&lt; <span class="string">&quot; 1.点击位置为鼠标指针，鼠标左/右键点击\n&quot;</span> &lt;&lt; <span class="string">&quot; 2.点击位置固定循环，鼠标左/右键点击\n&quot;</span> &lt;&lt; <span class="string">&quot; 0.退出\n&quot;</span>;</span><br><span class="line">    <span class="type">int</span> ch = _getch();</span><br><span class="line">    <span class="keyword">while</span>(ch &lt; <span class="string">&#x27;0&#x27;</span> || ch &gt; <span class="string">&#x27;2&#x27;</span>) ch = _getch();</span><br><span class="line">    std::<span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    <span class="built_in">set_cursor</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">if</span> (ch == <span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line">        <span class="built_in">set_cursor</span>(<span class="literal">true</span>);</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;配置：&quot;</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入每秒钟的点击次数(1—1000)：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">int</span> spd;</span><br><span class="line">        std::cin &gt;&gt; spd;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;\n请选择点击的键(0左键，1右键)：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        ch = _getch();</span><br><span class="line">        <span class="keyword">while</span>(ch &lt; <span class="string">&#x27;0&#x27;</span> || ch &gt; <span class="string">&#x27;1&#x27;</span>) ch = _getch();</span><br><span class="line">        <span class="type">int</span> CLICK_BUTTON_DOWN = (ch == <span class="string">&#x27;0&#x27;</span> ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_RIGHTDOWN);</span><br><span class="line">        <span class="type">int</span> CLICK_BUTTON_UP = (ch == <span class="string">&#x27;0&#x27;</span> ? MOUSEEVENTF_LEFTUP : MOUSEEVENTF_RIGHTUP);</span><br><span class="line">        std::<span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">        <span class="type">int</span> cont = <span class="literal">true</span>, lst_tim = <span class="built_in">clock</span>();</span><br><span class="line">        <span class="built_in">set_cursor</span>(<span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="built_in">gotoxy</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">            std::string t;</span><br><span class="line">            std::string y;</span><br><span class="line">            t=cont ? <span class="string">&quot;运行中&quot;</span> : <span class="string">&quot;已暂停&quot;</span>;</span><br><span class="line">            y=cont ? <span class="string">&quot;暂停&quot;</span> : <span class="string">&quot;继续&quot;</span>;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;\n\n连点器&quot;</span> &lt;&lt; t &lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;\n速度：&quot;</span> &lt;&lt; spd &lt;&lt; <span class="string">&quot;次/秒&quot;</span> &lt;&lt; std:: endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;  \n空格键：&quot;</span> &lt;&lt; y &lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;  \nEsc键:退出&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="built_in">SetWindowPos</span>(<span class="built_in">GetConsoleWindow</span>(), HWND_TOPMOST, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, SWP_NOMOVE | SWP_NOSIZE); <span class="comment">// 窗口置顶</span></span><br><span class="line">            <span class="keyword">if</span>(_kbhit())&#123;</span><br><span class="line">                <span class="type">int</span> ch = _getch();</span><br><span class="line">                <span class="keyword">if</span>(ch == <span class="number">27</span>)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(ch == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                    cont = !cont;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(cont)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="built_in">clock</span>() - lst_tim &gt;= <span class="number">1.0</span> / spd * CLOCKS_PER_SEC)&#123;</span><br><span class="line">                        lst_tim = <span class="built_in">clock</span>();</span><br><span class="line">                        POINT pt;</span><br><span class="line">                        <span class="built_in">GetCursorPos</span>(&amp;pt);</span><br><span class="line">                        <span class="built_in">mouse_event</span>(CLICK_BUTTON_DOWN, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">                        <span class="built_in">mouse_event</span>(CLICK_BUTTON_UP, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(ch == <span class="string">&#x27;2&#x27;</span>)&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;请输入您要点击的位置个数：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="type">int</span> times;</span><br><span class="line">        std::cin &gt;&gt; times;</span><br><span class="line">        std::vector&lt;Click&gt; ps;</span><br><span class="line">        <span class="built_in">set_cursor</span>(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= times; i++)&#123;</span><br><span class="line">            std::<span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;将鼠标移动到第&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;个位置上后按下空格：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="keyword">while</span> (_getch() != <span class="string">&#x27; &#x27;</span>) &#123;&#125;</span><br><span class="line">            POINT p;</span><br><span class="line">            <span class="built_in">GetCursorPos</span>(&amp;p);</span><br><span class="line">            ps.<span class="built_in">push_back</span>(&#123;p.x, p.y, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="string">&quot;&quot;</span>&#125;);</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;\n需要按下的键(0左键，1右键)：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="type">char</span> ch = _getch();</span><br><span class="line">            <span class="keyword">while</span> (ch &lt; <span class="string">&#x27;0&#x27;</span> || ch &gt; <span class="string">&#x27;1&#x27;</span>) ch = _getch();</span><br><span class="line">            ps.<span class="built_in">back</span>().button_down = (ch == <span class="string">&#x27;0&#x27;</span> ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_RIGHTDOWN);</span><br><span class="line">            ps.<span class="built_in">back</span>().button_up = (ch == <span class="string">&#x27;0&#x27;</span> ? MOUSEEVENTF_LEFTUP : MOUSEEVENTF_RIGHTUP);</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;\n在上一次点击后需要等待多少毫秒：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="type">int</span> delay;</span><br><span class="line">            std::cin &gt;&gt; delay;</span><br><span class="line">            ps.<span class="built_in">back</span>().delay = delay;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;\n附加描述（可不填）：&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="type">char</span> msg[<span class="number">10000</span>];</span><br><span class="line">            <span class="built_in">gets</span>(msg);</span><br><span class="line">            <span class="built_in">gets</span>(msg);</span><br><span class="line">            ps.<span class="built_in">back</span>().msg = msg;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> cont = <span class="literal">true</span>;</span><br><span class="line">        <span class="type">int</span> now = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> lst_tim = <span class="built_in">clock</span>();</span><br><span class="line">        std::<span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">        <span class="built_in">set_cursor</span>(<span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">            <span class="built_in">gotoxy</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">            std::string e;</span><br><span class="line">            std::string r;</span><br><span class="line">            e=cont ? <span class="string">&quot;运行中&quot;</span> : <span class="string">&quot;已暂停&quot;</span>;</span><br><span class="line">            r=cont ? <span class="string">&quot;暂停&quot;</span> : <span class="string">&quot;继续&quot;</span>;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;连点器&quot;</span> &lt;&lt; e &lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;当前位置描述：&quot;</span> &lt;&lt; ps[now].msg.<span class="built_in">c_str</span>() &lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;需要等待：&quot;</span> &lt;&lt; ps[now].delay &lt;&lt; <span class="string">&quot;毫秒&quot;</span>&lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;点击按键：&quot;</span> &lt;&lt; (ps[now].button_down == MOUSEEVENTF_LEFTDOWN ? <span class="string">&quot;右&quot;</span> : <span class="string">&quot;左&quot;</span> )&lt;&lt; <span class="string">&quot;键\n&quot;</span>  &lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot; 空格键:&quot;</span> &lt;&lt; r &lt;&lt; std::endl;</span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot; Esc键:退出&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="built_in">SetWindowPos</span>(<span class="built_in">GetConsoleWindow</span>(), HWND_TOPMOST, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, SWP_NOMOVE | SWP_NOSIZE); <span class="comment">// 窗口置顶</span></span><br><span class="line">            <span class="keyword">if</span>(_kbhit())&#123;</span><br><span class="line">                <span class="type">int</span> ch = _getch();</span><br><span class="line">                <span class="keyword">if</span>(ch == <span class="number">27</span>)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span>(ch == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                    cont = !cont;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(cont)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="built_in">clock</span>() - lst_tim &gt; ps[now].delay)&#123;</span><br><span class="line">                        lst_tim = <span class="built_in">clock</span>();</span><br><span class="line">                        POINT pt;</span><br><span class="line">                        <span class="built_in">GetCursorPos</span>(&amp;pt);</span><br><span class="line">                        <span class="built_in">SetCursorPos</span>(ps[now].x, ps[now].y);</span><br><span class="line">                        <span class="built_in">mouse_event</span>(ps[now].button_down, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">                        <span class="built_in">mouse_event</span>(ps[now].button_up, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">                        <span class="built_in">SetCursorPos</span>(pt.x, pt.y);</span><br><span class="line">                        <span class="keyword">if</span>(now + <span class="number">1</span> == (<span class="type">int</span>)ps.<span class="built_in">size</span>()) now = <span class="number">0</span>;</span><br><span class="line">                        <span class="keyword">else</span></span><br><span class="line">                            now = now + <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    std::<span class="built_in">system</span>(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;欢迎回来！\n\n&quot;</span> &lt;&lt;std::endl;</span><br><span class="line">    <span class="keyword">goto</span> _ReStart_;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>Title:</strong> C++鼠标连点器</li>
+        <li><strong>Author:</strong> Zephyr</li>
+        <li><strong>Created at
+                :</strong> 2023-02-04 18:02:10</li>
+        
+            <li>
+                <strong>Updated at
+                    :</strong> 2023-02-26 16:25:49
+            </li>
+        
+        <li>
+            <strong>Link:</strong> https://redefine.ohevan.com/2023/02/04/C-鼠标连点器/
+        </li>
+        <li>
+            <strong>
+                License:
+            </strong>
+            
+            This work is licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>.
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/C/">#C++</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/">#鼠标连点器</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                        rel="prev"
+                        href="/2023/04/04/Windows+CLion+OpenCV%E9%85%8D%E7%BD%AE/"
+                        >
+                            <span class="left arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">Windows+CLion+OpenCV配置</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">解决有关很久没更新后使用hexo s报错的问题</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">On this page</div>
+        <div class="page-title">C++鼠标连点器</div>
+        
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">VISITOR COUNT</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">TOTAL PAGE VIEWS</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.4.4</a></span>
+        </div>
+        
+        
+            <div>
+                Blog up for <span class="odometer" id="runtime_days" ></span> days <span class="odometer" id="runtime_hours"></span> hrs <span class="odometer" id="runtime_minutes"></span> Min <span class="odometer" id="runtime_seconds"></span> Sec
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+            
+                
+        
+                
+        
+                
+
+                    
+                        <script data-swup-reload-script src="/js/weather.js"></script>
+                    
+        
+                
+
+                    
+                        <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+                    
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex justify-center items-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+        ],
+        containers: ["#swup"],
+    });
+
+    swup.hooks.on("page:view", () => {
+        Global.refresh();
+    });
+
+    // if (document.readyState === "complete") {
+    //
+    // } else {
+    //     document.addEventListener("DOMContentLoaded", () => init());
+    // }
+</script>
+
+
+
+
+
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/libs/anime.min.js"></script>
+
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+<div id="he-plugin-simple"></div>
+<script>
+WIDGET = {"CONFIG":{"modules":"01234","background":"1","tmpColor":"FFFFFF","tmpSize":"16","cityColor":"FFFFFF","citySize":"16","aqiColor":"FFFFFF","aqiSize":"16","weatherIconSize":"24","alertIconSize":"18","padding":"10px 10px 10px 10px","shadow":"0","language":"auto","borderRadius":"15","fixed":"false","vertical":"top","horizontal":"left","key":"df33a79e19aa4ea3988d05594c7015cf"}}
+</script>
+<script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":200,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
