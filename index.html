@@ -38,32 +38,10 @@
         
         Zephyr&#39;s Blog
     </title>
-    
-<link rel="stylesheet" href="/css/style.css">
-
-
-    
-        
-<link rel="stylesheet" href="/assets/build/styles.css">
-
-    
-
-    
-<link rel="stylesheet" href="/fonts/fonts.css">
-
-    
-<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
 
     
 <link rel="stylesheet" href="/fonts/Chillax/chillax.css">
 
-    <!--- Font Part-->
-    
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    
-    
-    
 
     <!--- Inject Part-->
     
@@ -82,9 +60,186 @@
                     <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
                 
     
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        Zephyr&#39;s Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+    
+    
+
+
     <script id="hexo-configurations">
     window.config = {"hostname":"anivia-ad.github.io","root":"/","language":"en"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#cccccc","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#cccccc","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
     window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
     window.data = {"masonry":false};
   </script>
@@ -115,9 +270,9 @@
 
     
         <span class="pjax-progress-bar"></span>
-        <span class="swup-progress-icon">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-        </span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
     
 </div>
 
@@ -128,9 +283,8 @@
         
     <style>
         .home-banner-container {
-            background: transparent !important;
+            background: none !important;
         }
-
         .home-article-item,
         .sidebar-links,
         .sidebar-content,
@@ -141,30 +295,29 @@
         footer.footer {
             background-color: var(--background-color-transparent-80) !important;
         }
-
         .right-bottom-tools:hover,
         a.page-number:hover,
         a.extend:hover {
             background-color: var(--primary-color) !important;
         }
-
         .site-info,
         .home-article-sticky-label {
             background-color: var(--background-color-transparent-15) !important;
         }
-
         .home-article-sticky-label {
             backdrop-filter: none !important;
         }
     </style>
-
-    <div class="home-banner-background transition-fade">
+    <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen scale-125 sm:scale-110 box-border will-change-transform bg-cover">
+        <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png" alt="home-banner-background" class="w-full h-full object-cover dark:hidden">
+        <img src="/images/wallhaven-wqery6-dark.webp" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
     </div>
 
 
-<div class="home-banner-container flex justify-center items-center transition-fade">
-    <div class="content flex justify-center items-center">
-        <div class="description flex flex-col justify-center items-center"
+<div class="home-banner-container flex justify-center items-center transition-fade relative">
+    
+    <div class="content mt-8 flex flex-col justify-center items-center">
+        <div class="description flex flex-col justify-center items-center w-screen font-medium text-center"
         
              style="font-family: '', sans-serif; !important;"
                 
@@ -176,46 +329,52 @@
             
         </div>
         
-            <div class="social-contacts">
-                
+            
+            <div class="absolute bottom-0.5 flex flex-row justify-between max-w-[1340px] items-center w-full px-8 sm:px-12">
+                <div class="flex p-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 group rounded-full cursor-pointer flex justify-center items-center aspect-square h-full shadow-redefine-flat hover:shadow-redefine-flat-hover transition-shadow" onclick="scrollToMain()" >
+                    <i class="fa-solid fa-arrow-down fa-fw fa-lg group-hover:translate-y-1 transition-transform"></i>
+                </div>
+                <div class="social-contacts px-6 py-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 shadow-redefine-flat rounded-full flex flex-row gap-3 items-center">
                     
                         
-                            <span class="social-contact-item github">
-                                <a target="_blank" href="https://github.com/Anivia-ad">
-                                    <i class="fa-brands fa-github"></i>
-                                </a>
-                            </span>
+                            
+                                <span class="social-contact-item github">
+                                    <a target="_blank" href="https://github.com/Anivia-ad">
+                                        <i class="fa-brands fa-fw fa-lg fa-github"></i>
+                                    </a>
+                                </span>
+                            
                         
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                    
-                
-                
                     
                         
                     
-                
+                        
+                    
+                        
+                    
+                        
+                    
+                    
+                </div>
             </div>
         
     </div>
+    <script>
+        const scrollToMain = ()=> {
+            console.log('scroll');
+            const target = document.querySelector('.main-content-container');
+            target.scrollIntoView({ behavior: 'smooth'});
+        }
+    </script>
 </div>
-
-
-
     
 
     <div class="main-content-container">
 
 
         <div class="main-content-header">
-            <header class="navbar-container">
-    
+            <header class="navbar-container px-6 md:px-12">
+
     <div class="navbar-content has-home-banner">
         <div class="left">
             
@@ -232,33 +391,35 @@
                 <ul class="navbar-list">
                     
                         
+                            
+
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="active" 
-                                    href="/"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-house"></i>
-                                        
-                                        HOME
+                                <a class="active"
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
                                     
                                 </a>
+
                                 <!-- Submenu -->
                                 
                             </li>
                     
                         
+                            
+
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="" 
-                                    href="/archives"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-archive"></i>
-                                        
-                                        ARCHIVES
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
                                     
                                 </a>
+
                                 <!-- Submenu -->
                                 
                             </li>
@@ -273,7 +434,8 @@
             <!-- Mobile -->
             <div class="mobile">
                 
-                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
                 
                 <div class="icon-item navbar-bar">
                     <div class="navbar-bar-middle"></div>
@@ -282,42 +444,82 @@
         </div>
     </div>
 
-    <!-- Mobile drawer -->
-    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
-        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
             
                 
-                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
-                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group active" 
-                        href="/"  >
-                             
-                                
-                                    <i class="fa-regular fa-house"></i>
-                                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/"
+                        >
+                            <span>
                                 HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
                             
                         </a>
+                        
+
+                        
                     </li>
-                    <!-- Submenu -->
-                    
             
                 
-                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
-                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
-                        href="/archives"  >
-                             
-                                
-                                    <i class="fa-regular fa-archive"></i>
-                                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
                                 ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
                             
                         </a>
+                        
+
+                        
                     </li>
-                    <!-- Submenu -->
-                    
             
 
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
         </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">16</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
     </div>
 
     <div class="window-mask"></div>
@@ -332,6 +534,7 @@
             
                 <div class="home-sidebar-container">
     <div class="sticky-container sticky">
+        
         
             
                 <div class="sidebar-links">
@@ -368,26 +571,26 @@
             
             <div class="sidebar-content"  marginTop >
                 <div class="avatar flex justify-center">
-                    <img src="http://p1.music.126.net/QIvd2mKGXAkAvjjumhwu0g==/109951163092524792.jpg">
-                </div>
+    <img src="http://p1.music.126.net/QIvd2mKGXAkAvjjumhwu0g==/109951163092524792.jpg">
+</div>
                 <div class="author flex flex-col justify-center my-2.5 mx-0">
-                    <div class="name">Zephyr</div>
-                    
-                </div>
-                <div class="statistics">
-                    <a class="item" href="/tags">
-                        <div class="number">20</div>
-                        <div class="label">Tags</div>
-                    </a>
-                    <a class="item" href="/categories">
-                        <div class="number">2</div>
-                        <div class="label">Categories</div>
-                    </a>
-                    <a class="item" href="/archives">
-                        <div class="number">11</div>
-                        <div class="label">Posts</div>
-                    </a>
-                </div>
+    <div class="name">Zephyr</div>
+    
+</div>
+                <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">16</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
             </div>
         
 
@@ -415,28 +618,28 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2022/10/12/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071517955.png" alt="搭建个人博客的保姆级教程" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2022/10/12/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95/">
+                            搭建个人博客的保姆级教程
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2022/10/12/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95/">
-                        搭建个人博客的保姆级教程
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        这篇文章在 2 个教程基础上做了部分修改以成功达成搭建个人博客网站的目的.教程 1  教程 2 
+                    <div class="home-article-content markdown-body">
+                        
+                            这篇文章在 2 个教程基础上做了部分修改以成功达成搭建个人博客网站的目的.教程 1  教程 2 
 本文将使用Hexo框架和GitHub来创建属于自己的博客。
 一：搭建博客需要的工具：1：注册一个 GitHub 账号。注意！要记住你注册时填的邮箱和你的...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Wed Oct 12 2022 22:13:42 GMT+0800">
@@ -474,72 +677,7 @@
     <a href="/2022/10/12/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E6%B3%95/">Read more<span class="seo-reader-text">搭建个人博客的保姆级教程</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                
-                    
-                
-
-                
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
-                        <a href="/2023/10/11/%E4%B8%80%E5%BC%A0%E5%9B%BE%E8%A7%A3%E9%87%8A8%E7%A7%8D%E9%87%8D%E8%A6%81%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">
-                            <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202310111228438.webp" alt="一张图解释8种重要的网络协议" class="w-full h-full object-cover dark:brightness-75 transition-all" />
-                        </a>
-                    </div>
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2023/10/11/%E4%B8%80%E5%BC%A0%E5%9B%BE%E8%A7%A3%E9%87%8A8%E7%A7%8D%E9%87%8D%E8%A6%81%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">
-                        一张图解释8种重要的网络协议
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        ​	网络协议是在网络中的2台计算机之间相互传递数据的标准方式。
-
-1. HTTP (超文本传输协议)​	HTTP 是一个能够获取资源（例如HTML文件）的协议，是Web上任何数据交换的基础，而且是Client-server协议。
-2. HTTP&#x...
-                    
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Wed Oct 11 2023 12:00:00 GMT+0800">
-                
-                    2023-10-11
-                
-            </span>
-        </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fa-solid fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/Net/">Net</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/Protocol/">Protocol</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2023/10/11/%E4%B8%80%E5%BC%A0%E5%9B%BE%E8%A7%A3%E9%87%8A8%E7%A7%8D%E9%87%8D%E8%A6%81%E7%9A%84%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">Read more<span class="seo-reader-text">一张图解释8种重要的网络协议</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
-</div>
-
             </li>
         
             <li class="home-article-item">
@@ -551,30 +689,30 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/08/07/%E7%BB%88%E7%AB%AF%E7%BE%8E%E5%8C%96%20Windows%20Terminal+oh-my-posh%E7%BE%8E%E5%8C%96/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308071545164.png" alt="Windows终端美化 -- Windows Terminal + oh-my-posh" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/08/07/%E7%BB%88%E7%AB%AF%E7%BE%8E%E5%8C%96%20Windows%20Terminal+oh-my-posh%E7%BE%8E%E5%8C%96/">
+                            Windows终端美化 -- Windows Terminal + oh-my-posh
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/08/07/%E7%BB%88%E7%AB%AF%E7%BE%8E%E5%8C%96%20Windows%20Terminal+oh-my-posh%E7%BE%8E%E5%8C%96/">
-                        Windows终端美化 -- Windows Terminal + oh-my-posh
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        最终效果图:
+                    <div class="home-article-content markdown-body">
+                        
+                            最终效果图:
 步骤1 – 下载Windows Terminal​		在Microsoft Store搜索并下载Windows Terminal。（Windows Terminal Preview也可以）
 
 ​	
 步骤2 – 设置Windows Ter...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Mon Aug 07 2023 15:00:00 GMT+0800">
@@ -607,6 +745,7 @@
     <a href="/2023/08/07/%E7%BB%88%E7%AB%AF%E7%BE%8E%E5%8C%96%20Windows%20Terminal+oh-my-posh%E7%BE%8E%E5%8C%96/">Read more<span class="seo-reader-text">Windows终端美化 -- Windows Terminal + oh-my-posh</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -618,28 +757,28 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/06/23/C++%E7%BB%83%E6%89%8B--%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202306231840804.jpg" alt="对于动,静态数组使用的一些小思考" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/06/23/C++%E7%BB%83%E6%89%8B--%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+                            对于动,静态数组使用的一些小思考
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/06/23/C++%E7%BB%83%E6%89%8B--%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
-                        对于动,静态数组使用的一些小思考
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                         
+                    <div class="home-article-content markdown-body">
+                        
+                             
 
 这次C++练手项目是一个通讯录管理系统，跟着以上B站视频教程（P72-P83）进行开发。但是，这一次练习解答和我大作业的解答格外相似，但是我用的是vector数组，我立马拿去和上一次大作业的对比，这引发了我思考——vector动态数组和静态数组...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Fri Jun 23 2023 17:00:00 GMT+0800">
@@ -677,6 +816,7 @@
     <a href="/2023/06/23/C++%E7%BB%83%E6%89%8B--%E9%80%9A%E8%AE%AF%E5%BD%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">Read more<span class="seo-reader-text">对于动,静态数组使用的一些小思考</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -688,28 +828,28 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/04/05/Windows+CLion+cURL%E9%85%8D%E7%BD%AE/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202304051329543.png" alt="Windows+CLion+cULR 配置" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/04/05/Windows+CLion+cURL%E9%85%8D%E7%BD%AE/">
+                            Windows+CLion+cULR 配置
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/04/05/Windows+CLion+cURL%E9%85%8D%E7%BD%AE/">
-                        Windows+CLion+cULR 配置
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        下载cURL下载地址:   https://curl.se/download.html#Win64 下载打开后选择自己想要的解压地址。
+                    <div class="home-article-content markdown-body">
+                        
+                            下载cURL下载地址:   https://curl.se/download.html#Win64 下载打开后选择自己想要的解压地址。
 配置环境变量将cURL文件里的bin加入环境变量中的path中。
 在CLion中使用cURL新建项目，编辑CMak...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Wed Apr 05 2023 11:07:00 GMT+0800">
@@ -768,6 +908,7 @@
     <a href="/2023/04/05/Windows+CLion+cURL%E9%85%8D%E7%BD%AE/">Read more<span class="seo-reader-text">Windows+CLion+cULR 配置</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -779,32 +920,32 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/04/04/Windows+CLion+OpenCV%E9%85%8D%E7%BD%AE/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202304041257999.png" alt="Windows+CLion+OpenCV配置" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/04/04/Windows+CLion+OpenCV%E9%85%8D%E7%BD%AE/">
+                            Windows+CLion+OpenCV配置
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/04/04/Windows+CLion+OpenCV%E9%85%8D%E7%BD%AE/">
-                        Windows+CLion+OpenCV配置
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        下载OpenCV下载地址：https://opencv.org/releases/ 
+                    <div class="home-article-content markdown-body">
+                        
+                            下载OpenCV下载地址：https://opencv.org/releases/ 
 
 下载后打开压缩到你想要的位置。
 下载CMake下载地址：https://cmake.org/download/ 
 
 安装时选择为所有用户添加环境变量
 下载MinG...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Tue Apr 04 2023 12:00:10 GMT+0800">
@@ -837,6 +978,7 @@
     <a href="/2023/04/04/Windows+CLion+OpenCV%E9%85%8D%E7%BD%AE/">Read more<span class="seo-reader-text">Windows+CLion+OpenCV配置</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -848,31 +990,31 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/02/04/C-%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202302041804011.png" alt="C++鼠标连点器" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/02/04/C-%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/">
+                            C++鼠标连点器
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/02/04/C-%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/">
-                        C++鼠标连点器
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        前几天LOL PBE 出现了BUG，可以无限刷宝箱。但是要鼠标连续4下才能刷到。于是我就想到用鼠标连点器来自动刷。
+                    <div class="home-article-content markdown-body">
+                        
+                            前几天LOL PBE 出现了BUG，可以无限刷宝箱。但是要鼠标连续4下才能刷到。于是我就想到用鼠标连点器来自动刷。
 经过几次搜索，我在知乎上找到了能够自己设定鼠标坐标的连点器，我稍微修改了一下。
 最后，我也成功刷了1W多个宝箱。
 
 下面是原代码
 12...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Sat Feb 04 2023 18:02:10 GMT+0800">
@@ -905,6 +1047,7 @@
     <a href="/2023/02/04/C-%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/">Read more<span class="seo-reader-text">C++鼠标连点器</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -916,27 +1059,27 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301261723533.png" alt="解决有关很久没更新后使用hexo s报错的问题" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
+                            解决有关很久没更新后使用hexo s报错的问题
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">
-                        解决有关很久没更新后使用hexo s报错的问题
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        因为个人原因很久没更新博客，前几天想着更新我的博客，写好后拿去Hexo s ，结果报错 。下面是报错结果：
+                    <div class="home-article-content markdown-body">
+                        
+                            因为个人原因很久没更新博客，前几天想着更新我的博客，写好后拿去Hexo s ，结果报错 。下面是报错结果：
 12345678910111213141516171819202122232425262728293031323334353637383940...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Thu Jan 26 2023 17:19:00 GMT+0800">
@@ -969,6 +1112,7 @@
     <a href="/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/">Read more<span class="seo-reader-text">解决有关很久没更新后使用hexo s报错的问题</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -980,32 +1124,32 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
                         <a href="/2023/01/04/C++%E7%BC%96%E5%86%99%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
                             <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301041910707.png" alt="C++编写学生信息管理系统" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2023/01/04/C++%E7%BC%96%E5%86%99%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+                            C++编写学生信息管理系统
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2023/01/04/C++%E7%BC%96%E5%86%99%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
-                        C++编写学生信息管理系统
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        前言这个是我的一个大作业，记录下这个大作业的源代码。
+                    <div class="home-article-content markdown-body">
+                        
+                            前言这个是我的一个大作业，记录下这个大作业的源代码。
 题目要求1.功能内容必须包含以下内容：
 ​	对记录进行增加、删除、查询、修改、浏览等操作。
 2.编程使用的技术必须包含以下C++语言知识点：
 ​	(1)  变量的使用
 ​	(2)  if语句
 ​	...
-                    
-                </div>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
             <span class="home-article-date" data-date="Wed Jan 04 2023 19:00:00 GMT+0800">
@@ -1038,6 +1182,7 @@
     <a href="/2023/01/04/C++%E7%BC%96%E5%86%99%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">Read more<span class="seo-reader-text">C++编写学生信息管理系统</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
             <li class="home-article-item">
@@ -1049,32 +1194,31 @@
                 
 
                 
-                    <div id="home-article-thumbnail" class="relative h-[150px] overflow-hidden rounded-t-[10.8px] md:rounded-t-large -m-5 mb-3 sm:-m-6 sm:mb-4 md:-m-7 md:mb-5">
-                        <a href="/2022/10/22/Adobe%E8%BD%AF%E4%BB%B62023%E7%89%B9%E5%88%AB%E7%89%88/">
-                            <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202306232031654.png" alt="Adobe软件2023特别版" class="w-full h-full object-cover dark:brightness-75 transition-all" />
+                    <div id="home-article-thumbnail" class="home-article-thumbnail relative h-[150px] overflow-hidden rounded-t-large">
+                        <a href="/2022/10/18/%E6%89%80%E6%9C%89%E6%88%91%E8%83%BD%E6%89%BE%E5%88%B0%E7%9A%84CDN%E5%8A%A0%E9%80%9F/">
+                            <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202306232026626.png" alt="所有我能找到的CDN加速" class="w-full h-full object-cover dark:brightness-75 transition-all" />
                         </a>
                     </div>
                 
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-5">
+                    <h3 class="home-article-title">
+                        <a href="/2022/10/18/%E6%89%80%E6%9C%89%E6%88%91%E8%83%BD%E6%89%BE%E5%88%B0%E7%9A%84CDN%E5%8A%A0%E9%80%9F/">
+                            所有我能找到的CDN加速
+                        </a>
+                    </h3>
 
-                <h3 class="home-article-title">
-                    <a href="/2022/10/22/Adobe%E8%BD%AF%E4%BB%B62023%E7%89%B9%E5%88%AB%E7%89%88/">
-                        Adobe软件2023特别版
-                    </a>
-                </h3>
+                    <div class="home-article-content markdown-body">
+                        
+                            前言：建站后，我一直找图床，之后了解到 Github 也可以当成图床。但是 raw 在大陆的访问速度实在是太慢了，有时候还会访问超时。于是我找各种加速方法。然后我了解到 jsdelivr。设置好后才发现 jsdelivr 已经不能在大陆使用了，只好慢...
+                        
+                    </div>
 
-                <div class="home-article-content markdown-body">
-                    
-                        Adobe 软件 2023 特别版分享某一天早上网上冲浪偶然发现 Adobe 系列更新到 2023 版了，就找来 2023 特别版分享出来。
-注意：Windows Defender 会将安装器误报毒，安装前请关闭 Windows Defender和杀...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
+                    <div class="home-article-meta-info-container">
     <div class="home-article-meta-info">
         <span><i class="fa-solid fa-calendars"></i>&nbsp;
-            <span class="home-article-date" data-date="Sat Oct 22 2022 21:42:56 GMT+0800">
+            <span class="home-article-date" data-date="Tue Oct 18 2022 21:41:59 GMT+0800">
                 
-                    2022-10-22
+                    2022-10-18
                 
             </span>
         </span>
@@ -1086,12 +1230,12 @@
                     
                         <li>
                             
-                            <a href="/tags/adobe/">adobe</a>&nbsp;
+                            <a href="/tags/Hexo/">Hexo</a>&nbsp;
                         </li>
                     
                         <li>
                             | 
-                            <a href="/tags/%E8%BD%AF%E4%BB%B6/">软件</a>&nbsp;
+                            <a href="/tags/CDN/">CDN</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -1099,16 +1243,17 @@
         
     </div>
 
-    <a href="/2022/10/22/Adobe%E8%BD%AF%E4%BB%B62023%E7%89%B9%E5%88%AB%E7%89%88/">Read more<span class="seo-reader-text">Adobe软件2023特别版</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+    <a href="/2022/10/18/%E6%89%80%E6%9C%89%E6%88%91%E8%83%BD%E6%89%BE%E5%88%B0%E7%9A%84CDN%E5%8A%A0%E9%80%9F/">Read more<span class="seo-reader-text">所有我能找到的CDN加速</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
 </div>
 
+                </div>
             </li>
         
     </ul>
 
-    <div class="home-paginator">
+    <div class="home-paginator px-7 py-5">
         <div class="paginator">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa-regular fa-angle-right"></i></a>
+    <span class="page-number current">1</span>
 </div>
 
     </div>
@@ -1133,7 +1278,16 @@
               <span>2022</span>
               -
             
-            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        9 posts in total
+                    </span>
+                    
+                </p>
+            
         </div>
         
             <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1154,7 +1308,7 @@
         
         <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
             <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
-            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
         </div>
         
         
@@ -1366,11 +1520,10 @@
 
 
 
+
+
 <div class="post-scripts" data-swup-reload-script>
     
-        
-<script src="/js/libs/anime.min.js"></script>
-
         
 <script src="/js/tools/tocToggle.js" type="module"></script>
 

@@ -26,7 +26,7 @@
 <meta property="og:description" content="因为个人原因很久没更新博客，前几天想着更新我的博客，写好后拿去Hexo s ，结果报错 。下面是报错结果： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556PS D:\blog&gt; hexo sINFO  Validating confi">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-01-26T09:19:00.000Z">
-<meta property="article:modified_time" content="2023-08-07T07:03:01.386Z">
+<meta property="article:modified_time" content="2024-04-14T08:17:40.768Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="博客">
 <meta property="article:tag" content="博客问题">
@@ -46,32 +46,10 @@
         
         Zephyr&#39;s Blog
     </title>
-    
-<link rel="stylesheet" href="/css/style.css">
-
-
-    
-        
-<link rel="stylesheet" href="/assets/build/styles.css">
-
-    
-
-    
-<link rel="stylesheet" href="/fonts/fonts.css">
-
-    
-<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
 
     
 <link rel="stylesheet" href="/fonts/Chillax/chillax.css">
 
-    <!--- Font Part-->
-    
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    
-    
-    
 
     <!--- Inject Part-->
     
@@ -90,9 +68,186 @@
                     <script data-swup-reload-script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
                 
     
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        Zephyr&#39;s Blog
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    
+    
+    
+
+
     <script id="hexo-configurations">
     window.config = {"hostname":"anivia-ad.github.io","root":"/","language":"en"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#cccccc","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.5.0","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":false,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":false,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202308241207627.png","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"在下灵风","subtitle":{"text":["梦想这东西和经典一样 永远不会因为时间而褪色","何其荣幸 何德何能","晴日暖风生麦气，绿阴幽草胜花时","滟滟随波千万里，何处春江无月明"],"hitokoto":{"enable":true,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#cccccc","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":null,"url":"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap","font-family":"Noto Sans SC"},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/Anivia-ad","instagram":null,"zhihu":null,"twitter":null,"email":null},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"}},"search":{"enable":true,"preload":true},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"今日事，今日毕","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/10/12 11:45:14"};
     window.lang_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
     window.data = {"masonry":false};
   </script>
@@ -123,9 +278,9 @@
 
     
         <span class="pjax-progress-bar"></span>
-        <span class="swup-progress-icon">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-        </span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
     
 </div>
 
@@ -138,9 +293,9 @@
 
 
         <div class="main-content-header">
-            <header class="navbar-container">
-    
-    <div class="navbar-content">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
         <div class="left">
             
             <a class="logo-title" href="/">
@@ -156,33 +311,35 @@
                 <ul class="navbar-list">
                     
                         
+                            
+
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="" 
-                                    href="/"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-house"></i>
-                                        
-                                        HOME
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    HOME
                                     
                                 </a>
+
                                 <!-- Submenu -->
                                 
                             </li>
                     
                         
+                            
+
                             <li class="navbar-item">
                                 <!-- Menu -->
-                                <a class="" 
-                                    href="/archives"  >
-                                    
-                                        
-                                            <i class="fa-regular fa-archive"></i>
-                                        
-                                        ARCHIVES
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    ARCHIVES
                                     
                                 </a>
+
                                 <!-- Submenu -->
                                 
                             </li>
@@ -197,7 +354,8 @@
             <!-- Mobile -->
             <div class="mobile">
                 
-                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
                 
                 <div class="icon-item navbar-bar">
                     <div class="navbar-bar-middle"></div>
@@ -206,42 +364,82 @@
         </div>
     </div>
 
-    <!-- Mobile drawer -->
-    <div class="navbar-drawer w-full absolute top-0 left-0 bg-background-color">
-        <ul class="drawer-navbar-list flex flex-col justify-start items-center">
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
             
                 
-                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
-                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
-                        href="/"  >
-                             
-                                
-                                    <i class="fa-regular fa-house"></i>
-                                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
                                 HOME
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
                             
                         </a>
+                        
+
+                        
                     </li>
-                    <!-- Submenu -->
-                    
             
                 
-                    <li class="drawer-navbar-item text-base my-1.5 flex justify-center items-center">
-                        <a class="rounded-3xl py-1.5 px-5 hover:border hover:!text-primary active:!text-primary group " 
-                        href="/archives"  >
-                             
-                                
-                                    <i class="fa-regular fa-archive"></i>
-                                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
                                 ARCHIVES
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
                             
                         </a>
+                        
+
+                        
                     </li>
-                    <!-- Submenu -->
-                    
             
 
+            
+            
+                
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
         </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">16</div>
+        <div class="label text-third-text-color text-sm">Tags</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">Categories</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">9</div>
+        <div class="label text-third-text-color text-sm">Posts</div>
+    </a>
+</div>
     </div>
 
     <div class="window-mask"></div>
@@ -258,23 +456,23 @@
             <div class="main-content">
 
                 
-                    <div class="post-page-container">
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
     <div class="article-content-container">
 
-        <div class="article-title">
+        <div class="article-title relative w-full">
             
                 
                 
-                <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301261723533.png" alt="解决有关很久没更新后使用hexo s报错的问题" class="max-w-none"/>
+                <img src="https://cdn1.tianli0.top/gh/Anivia-ad/photo_DEMO/img/202301261723533.png" alt="解决有关很久没更新后使用hexo s报错的问题" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75"/>
                 
-                <h1 class="article-title-cover">解决有关很久没更新后使用hexo s报错的问题</h1>
+                <div class="w-full flex items-center absolute bottom-0 justify-start">
+                    <h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-bold backdrop-blur-lg rounded-xl border border-border-color ">解决有关很久没更新后使用hexo s报错的问题</h1>
+                </div>
             
             </div>
-            
-                    
+
         
-        
-            <div class="article-header flex flex-row gap-2 items-center">
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
                 <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
                     <img src="http://p1.music.126.net/QIvd2mKGXAkAvjjumhwu0g==/109951163092524792.jpg">
                 </div>
@@ -294,8 +492,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-08-07 15:03:01</span>
-            <span class="mobile">2023-08-07 15:03:01</span>
+            <span class="desktop">2024-04-14 16:17:40</span>
+            <span class="mobile">2024-04-14 16:17:40</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -336,7 +534,7 @@
         
 
 
-        <div class="article-content markdown-body">
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
             <p>因为个人原因很久没更新博客，前几天想着更新我的博客，写好后拿去Hexo s ，结果报错 。下面是报错结果：</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">PS D:\blog&gt; hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">WARN  Deprecated config detected: &quot;external_link&quot; with a Boolean value is deprecated. See https://hexo.io/docs/configuration for more details.</span><br><span class="line">ERROR Plugin load failed: hexo-butterfly-clock</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-butterfly-clock&#x27;       </span><br><span class="line">ERROR Plugin load failed: hexo-wordcount</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-wordcount&#x27;</span><br><span class="line"></span><br><span class="line">INFO  </span><br><span class="line">  ===================================================================</span><br><span class="line"></span><br><span class="line">      #####  #    # ##### ##### ###### #####  ###### #      #   #</span><br><span class="line">      #    # #    #   #     #   #      #    # #      #       # #</span><br><span class="line">      #####  #    #   #     #   #####  #    # #####  #        #</span><br><span class="line">      #    # #    #   #     #   #      #####  #      #        #</span><br><span class="line">      #    # #    #   #     #   #      #   #  #      #        #</span><br><span class="line">      #####   ####    #     #   ###### #    # #      ######   #</span><br><span class="line">    </span><br><span class="line">                            4.4.0</span><br><span class="line">  ===================================================================</span><br><span class="line">Unhandled rejection TypeError: D:\blog\node_modules\hexo-theme-butterfly\layout\includes\widget\index.pug:33</span><br><span class="line">    31|       !=partial(&#x27;includes/widget/card_tags&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line">    32|       !=partial(&#x27;includes/widget/card_archives&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line"></span><br><span class="line">  &gt; 33|       !=partial(&#x27;includes/widget/card_webinfo&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line">  &gt; 34|       !=partial(&#x27;includes/widget/card_bottom_self&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line"></span><br><span class="line">D:\blog\node_modules\hexo-theme-butterfly\layout\includes\widget\card_webinfo.pug:19</span><br><span class="line">    17|         .webinfo-item</span><br><span class="line">    18|           .item-name=_p(&#x27;aside.card_webinfo.site_wordcount&#x27;) + &quot; :&quot;</span><br><span class="line">  &gt; 19|           .item-count=totalcount(site)</span><br><span class="line">  &gt; 20|       if theme.busuanzi.site_uv</span><br><span class="line">  &gt; 21|         .webinfo-item</span><br><span class="line">  &gt; 22|           .item-name= _p(&#x27;aside.card_webinfo.site_uv_name&#x27;) + &quot; :&quot;</span><br><span class="line"></span><br><span class="line">totalcount is not a function</span><br><span class="line">    at eval (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:58:57)    </span><br><span class="line">    at template (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:101:7)</span><br><span class="line">    at _View._compiledSync (D:\blog\node_modules\hexo\lib\theme\view.js:132:24)</span><br><span class="line">    at _View.renderSync (D:\blog\node_modules\hexo\lib\theme\view.js:59:25)</span><br><span class="line">    at D:\blog\node_modules\hexo\lib\plugins\helper\partial.js:31:52</span><br><span class="line">    at Cache.apply (D:\blog\node_modules\hexo-util\lib\cache.js:27:46)</span><br><span class="line">    at Object.fragmentCache (D:\blog\node_modules\hexo\lib\plugins\helper\fragment_cache.js:11:34)</span><br><span class="line">    at Object.partial (D:\blog\node_modules\hexo\lib\plugins\helper\partial.js:31:17)</span><br><span class="line">    at eval (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:1896:46)  </span><br><span class="line">    at template (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:5857:7)</span><br><span class="line">    at _View._compiled (D:\blog\node_modules\hexo\lib\theme\view.js:136:50)</span><br><span class="line">    at _View.render (D:\blog\node_modules\hexo\lib\theme\view.js:39:17)</span><br><span class="line">    at D:\blog\node_modules\hexo\lib\hexo\index.js:64:21</span><br><span class="line">    at tryCatcher (D:\blog\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="line">    at D:\blog\node_modules\bluebird\js\release\method.js:15:34</span><br><span class="line">    at RouteStream._read (D:\blog\node_modules\hexo\lib\hexo\router.js:47:5)</span><br><span class="line">    at Readable.read (node:internal/streams/readable:496:12)</span><br><span class="line">    at resume_ (node:internal/streams/readable:999:12)</span><br><span class="line">    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 
@@ -368,13 +566,13 @@
         
 
         
-            <ul class="post-tags-box">
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
                 
-                    <li class="tag-item">
+                    <li class="tag-item mx-0.5">
                         <a href="/tags/%E5%8D%9A%E5%AE%A2/">#博客</a>&nbsp;
                     </li>
                 
-                    <li class="tag-item">
+                    <li class="tag-item mx-0.5">
                         <a href="/tags/%E5%8D%9A%E5%AE%A2%E9%97%AE%E9%A2%98/">#博客问题</a>&nbsp;
                     </li>
                 
@@ -384,9 +582,9 @@
         
 
         
-            <div class="article-nav">
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
-                    <div class="article-prev">
+                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="prev"
                         rel="prev"
                         href="/2023/02/04/C-%E9%BC%A0%E6%A0%87%E8%BF%9E%E7%82%B9%E5%99%A8/"
@@ -402,7 +600,7 @@
                     </div>
                 
                 
-                    <div class="article-next">
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="next"
                         rel="next"
                         href="/2023/01/04/C++%E7%BC%96%E5%86%99%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"
@@ -458,7 +656,16 @@
               <span>2022</span>
               -
             
-            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Zephyr</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        9 posts in total
+                    </span>
+                    
+                </p>
+            
         </div>
         
             <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -479,7 +686,7 @@
         
         <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
             <span class="lg:block text-sm">POWERED BY <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a></span>
-            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.5.0</a></span>
+            <span class="text-sm lg:block">THEME&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
         </div>
         
         
@@ -707,11 +914,10 @@
 
 
 
+
+
 <div class="post-scripts" data-swup-reload-script>
     
-        
-<script src="/js/libs/anime.min.js"></script>
-
         
 <script src="/js/tools/tocToggle.js" type="module"></script>
 
