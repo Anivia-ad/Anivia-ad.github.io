@@ -356,29 +356,6 @@
       </tags>
   </entry>
   <entry>
-    <title>所有我能找到的CDN加速</title>
-    <url>/2022/10/18/%E6%89%80%E6%9C%89%E6%88%91%E8%83%BD%E6%89%BE%E5%88%B0%E7%9A%84CDN%E5%8A%A0%E9%80%9F/</url>
-    <content><![CDATA[<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>建站后，我一直找图床，之后了解到 Github 也可以当成图床。但是 raw 在大陆的访问速度实在是太慢了，有时候还会访问超时。<br>最近找到了几个<strong>可以加速 Github，可在大陆用的免费</strong> CDN.</p>
-<p><strong>npm+Github 搭建图床——<a class="link"   href="https://amnesia-f.github.io/posts/npm/" >使用 npm 搭建图床教程</a></strong>.</p>
-<p>下面是免费 CDN。</p>
-<p><strong>1.jsdelivr</strong> <a class="link"   href="https://www.jsdelivr.com/" >Jsdelivr 官网</a></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ⅰ http://cdn.jsdelivr.net</span><br><span class="line">Ⅱ http://fastly.jsdelivr.net</span><br><span class="line">Ⅲ http://gcore.jsdelivr.net</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>2.cloudflare</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://cdnjs.cloudflare.com/</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>3.unpkg</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.unpkg.com/</span><br><span class="line">https://unpkg.zhimg.com   (国内镜像)</span><br></pre></td></tr></table></figure></div>
-
-<p><strong>4.BootCDN</strong></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.bootcdn.cn/</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>CDN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Windows+CLion+cULR 配置</title>
     <url>/2023/04/05/Windows+CLion+cURL%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h1 id="下载cURL"><a href="#下载cURL" class="headerlink" title="下载cURL"></a>下载cURL</h1><p>下载地址:   <a class="link"   href="https://curl.se/download.html#Win64" >https://curl.se/download.html#Win64</a><br><img  
@@ -597,37 +574,26 @@
       </tags>
   </entry>
   <entry>
-    <title>解决有关很久没更新后使用hexo s报错的问题</title>
-    <url>/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>因为个人原因很久没更新博客，前几天想着更新我的博客，写好后拿去Hexo s ，结果报错 。下面是报错结果：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">PS D:\blog&gt; hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">WARN  Deprecated config detected: &quot;external_link&quot; with a Boolean value is deprecated. See https://hexo.io/docs/configuration for more details.</span><br><span class="line">ERROR Plugin load failed: hexo-butterfly-clock</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-butterfly-clock&#x27;       </span><br><span class="line">ERROR Plugin load failed: hexo-wordcount</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-wordcount&#x27;</span><br><span class="line"></span><br><span class="line">INFO  </span><br><span class="line">  ===================================================================</span><br><span class="line"></span><br><span class="line">      #####  #    # ##### ##### ###### #####  ###### #      #   #</span><br><span class="line">      #    # #    #   #     #   #      #    # #      #       # #</span><br><span class="line">      #####  #    #   #     #   #####  #    # #####  #        #</span><br><span class="line">      #    # #    #   #     #   #      #####  #      #        #</span><br><span class="line">      #    # #    #   #     #   #      #   #  #      #        #</span><br><span class="line">      #####   ####    #     #   ###### #    # #      ######   #</span><br><span class="line">    </span><br><span class="line">                            4.4.0</span><br><span class="line">  ===================================================================</span><br><span class="line">Unhandled rejection TypeError: D:\blog\node_modules\hexo-theme-butterfly\layout\includes\widget\index.pug:33</span><br><span class="line">    31|       !=partial(&#x27;includes/widget/card_tags&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line">    32|       !=partial(&#x27;includes/widget/card_archives&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line"></span><br><span class="line">  &gt; 33|       !=partial(&#x27;includes/widget/card_webinfo&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line">  &gt; 34|       !=partial(&#x27;includes/widget/card_bottom_self&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line"></span><br><span class="line">D:\blog\node_modules\hexo-theme-butterfly\layout\includes\widget\card_webinfo.pug:19</span><br><span class="line">    17|         .webinfo-item</span><br><span class="line">    18|           .item-name=_p(&#x27;aside.card_webinfo.site_wordcount&#x27;) + &quot; :&quot;</span><br><span class="line">  &gt; 19|           .item-count=totalcount(site)</span><br><span class="line">  &gt; 20|       if theme.busuanzi.site_uv</span><br><span class="line">  &gt; 21|         .webinfo-item</span><br><span class="line">  &gt; 22|           .item-name= _p(&#x27;aside.card_webinfo.site_uv_name&#x27;) + &quot; :&quot;</span><br><span class="line"></span><br><span class="line">totalcount is not a function</span><br><span class="line">    at eval (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:58:57)    </span><br><span class="line">    at template (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:101:7)</span><br><span class="line">    at _View._compiledSync (D:\blog\node_modules\hexo\lib\theme\view.js:132:24)</span><br><span class="line">    at _View.renderSync (D:\blog\node_modules\hexo\lib\theme\view.js:59:25)</span><br><span class="line">    at D:\blog\node_modules\hexo\lib\plugins\helper\partial.js:31:52</span><br><span class="line">    at Cache.apply (D:\blog\node_modules\hexo-util\lib\cache.js:27:46)</span><br><span class="line">    at Object.fragmentCache (D:\blog\node_modules\hexo\lib\plugins\helper\fragment_cache.js:11:34)</span><br><span class="line">    at Object.partial (D:\blog\node_modules\hexo\lib\plugins\helper\partial.js:31:17)</span><br><span class="line">    at eval (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:1896:46)  </span><br><span class="line">    at template (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:5857:7)</span><br><span class="line">    at _View._compiled (D:\blog\node_modules\hexo\lib\theme\view.js:136:50)</span><br><span class="line">    at _View.render (D:\blog\node_modules\hexo\lib\theme\view.js:39:17)</span><br><span class="line">    at D:\blog\node_modules\hexo\lib\hexo\index.js:64:21</span><br><span class="line">    at tryCatcher (D:\blog\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="line">    at D:\blog\node_modules\bluebird\js\release\method.js:15:34</span><br><span class="line">    at RouteStream._read (D:\blog\node_modules\hexo\lib\hexo\router.js:47:5)</span><br><span class="line">    at Readable.read (node:internal/streams/readable:496:12)</span><br><span class="line">    at resume_ (node:internal/streams/readable:999:12)</span><br><span class="line">    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+    <title>所有我能找到的CDN加速</title>
+    <url>/2022/10/18/%E6%89%80%E6%9C%89%E6%88%91%E8%83%BD%E6%89%BE%E5%88%B0%E7%9A%84CDN%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>建站后，我一直找图床，之后了解到 Github 也可以当成图床。但是 raw 在大陆的访问速度实在是太慢了，有时候还会访问超时。<br>最近找到了几个<strong>可以加速 Github，可在大陆用的免费</strong> CDN.</p>
+<p><strong>npm+Github 搭建图床——<a class="link"   href="https://amnesia-f.github.io/posts/npm/" >使用 npm 搭建图床教程</a></strong>.</p>
+<p>下面是免费 CDN。</p>
+<p><strong>1.jsdelivr</strong> <a class="link"   href="https://www.jsdelivr.com/" >Jsdelivr 官网</a></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ⅰ http://cdn.jsdelivr.net</span><br><span class="line">Ⅱ http://fastly.jsdelivr.net</span><br><span class="line">Ⅲ http://gcore.jsdelivr.net</span><br></pre></td></tr></table></figure></div>
 
+<p><strong>2.cloudflare</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://cdnjs.cloudflare.com/</span><br></pre></td></tr></table></figure></div>
 
-<h1 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h1><p>因为很久没更新 ，我第一时间想到的是不是因为node.js 和npm版本太老了？于是就更新了node.js 和npm。</p>
-<p>node.js更新我是去官网下载最新版安装包 。</p>
-<p>而npm更新则是用命令行更新。</p>
-<p>NPM更新到最新版命令：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure></div>
+<p><strong>3.unpkg</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.unpkg.com/</span><br><span class="line">https://unpkg.zhimg.com   (国内镜像)</span><br></pre></td></tr></table></figure></div>
 
-<h1 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h1><p>现在电脑上的node.js 和npm均是最新版了，但是hexo s后仍然报错，还是同样的ERROR，但是看到别人却成功了。于是分析了一下报错信息，</p>
-<p>发现了这几行东西：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Plugin load failed: hexo-butterfly-clock</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-butterfly-clock&#x27;       </span><br><span class="line">ERROR Plugin load failed: hexo-wordcount</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-wordcount&#x27;</span><br></pre></td></tr></table></figure></div>
-
-<p>就发现<strong>根本原因是hexo-butterfly-clock和hexo-wordcount这2个插件缺失</strong></p>
-<p>于是就立马下载插件</p>
-<h2 id="安装hexo-butterfly-clock"><a href="#安装hexo-butterfly-clock" class="headerlink" title="安装hexo-butterfly-clock"></a>安装hexo-butterfly-clock</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-butterfly-clock --save </span><br></pre></td></tr></table></figure></div>
-<p>或者</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-butterfly-clock --save</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="安装hexo-wordcount"><a href="#安装hexo-wordcount" class="headerlink" title="安装hexo-wordcount"></a>安装hexo-wordcount</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-wordcount --save</span><br></pre></td></tr></table></figure></div>
-<p>或者</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-wordcount --save</span><br></pre></td></tr></table></figure></div>
-
-<p>到此，再次hexo s ，可发现问题已解决。</p>
+<p><strong>4.BootCDN</strong></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.bootcdn.cn/</span><br></pre></td></tr></table></figure></div>
 ]]></content>
       <tags>
-        <tag>博客</tag>
-        <tag>博客问题</tag>
+        <tag>Hexo</tag>
+        <tag>CDN</tag>
       </tags>
   </entry>
   <entry>
@@ -714,6 +680,40 @@
       <tags>
         <tag>Windows Terminal</tag>
         <tag>oh-my-posh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决有关很久没更新后使用hexo s报错的问题</title>
+    <url>/2023/01/26/%E8%A7%A3%E5%86%B3%E6%9C%89%E5%85%B3%E5%BE%88%E4%B9%85%E6%B2%A1%E6%9B%B4%E6%96%B0%E5%90%8E%E4%BD%BF%E7%94%A8hexo%20s%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>因为个人原因很久没更新博客，前几天想着更新我的博客，写好后拿去Hexo s ，结果报错 。下面是报错结果：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">PS D:\blog&gt; hexo s</span><br><span class="line">INFO  Validating config</span><br><span class="line">WARN  Deprecated config detected: &quot;external_link&quot; with a Boolean value is deprecated. See https://hexo.io/docs/configuration for more details.</span><br><span class="line">ERROR Plugin load failed: hexo-butterfly-clock</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-butterfly-clock&#x27;       </span><br><span class="line">ERROR Plugin load failed: hexo-wordcount</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-wordcount&#x27;</span><br><span class="line"></span><br><span class="line">INFO  </span><br><span class="line">  ===================================================================</span><br><span class="line"></span><br><span class="line">      #####  #    # ##### ##### ###### #####  ###### #      #   #</span><br><span class="line">      #    # #    #   #     #   #      #    # #      #       # #</span><br><span class="line">      #####  #    #   #     #   #####  #    # #####  #        #</span><br><span class="line">      #    # #    #   #     #   #      #####  #      #        #</span><br><span class="line">      #    # #    #   #     #   #      #   #  #      #        #</span><br><span class="line">      #####   ####    #     #   ###### #    # #      ######   #</span><br><span class="line">    </span><br><span class="line">                            4.4.0</span><br><span class="line">  ===================================================================</span><br><span class="line">Unhandled rejection TypeError: D:\blog\node_modules\hexo-theme-butterfly\layout\includes\widget\index.pug:33</span><br><span class="line">    31|       !=partial(&#x27;includes/widget/card_tags&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line">    32|       !=partial(&#x27;includes/widget/card_archives&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line"></span><br><span class="line">  &gt; 33|       !=partial(&#x27;includes/widget/card_webinfo&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line">  &gt; 34|       !=partial(&#x27;includes/widget/card_bottom_self&#x27;, &#123;&#125;, &#123;cache: true&#125;)</span><br><span class="line"></span><br><span class="line">D:\blog\node_modules\hexo-theme-butterfly\layout\includes\widget\card_webinfo.pug:19</span><br><span class="line">    17|         .webinfo-item</span><br><span class="line">    18|           .item-name=_p(&#x27;aside.card_webinfo.site_wordcount&#x27;) + &quot; :&quot;</span><br><span class="line">  &gt; 19|           .item-count=totalcount(site)</span><br><span class="line">  &gt; 20|       if theme.busuanzi.site_uv</span><br><span class="line">  &gt; 21|         .webinfo-item</span><br><span class="line">  &gt; 22|           .item-name= _p(&#x27;aside.card_webinfo.site_uv_name&#x27;) + &quot; :&quot;</span><br><span class="line"></span><br><span class="line">totalcount is not a function</span><br><span class="line">    at eval (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:58:57)    </span><br><span class="line">    at template (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:101:7)</span><br><span class="line">    at _View._compiledSync (D:\blog\node_modules\hexo\lib\theme\view.js:132:24)</span><br><span class="line">    at _View.renderSync (D:\blog\node_modules\hexo\lib\theme\view.js:59:25)</span><br><span class="line">    at D:\blog\node_modules\hexo\lib\plugins\helper\partial.js:31:52</span><br><span class="line">    at Cache.apply (D:\blog\node_modules\hexo-util\lib\cache.js:27:46)</span><br><span class="line">    at Object.fragmentCache (D:\blog\node_modules\hexo\lib\plugins\helper\fragment_cache.js:11:34)</span><br><span class="line">    at Object.partial (D:\blog\node_modules\hexo\lib\plugins\helper\partial.js:31:17)</span><br><span class="line">    at eval (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:1896:46)  </span><br><span class="line">    at template (eval at wrap (D:\blog\node_modules\pug-runtime\wrap.js:6:10), &lt;anonymous&gt;:5857:7)</span><br><span class="line">    at _View._compiled (D:\blog\node_modules\hexo\lib\theme\view.js:136:50)</span><br><span class="line">    at _View.render (D:\blog\node_modules\hexo\lib\theme\view.js:39:17)</span><br><span class="line">    at D:\blog\node_modules\hexo\lib\hexo\index.js:64:21</span><br><span class="line">    at tryCatcher (D:\blog\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="line">    at D:\blog\node_modules\bluebird\js\release\method.js:15:34</span><br><span class="line">    at RouteStream._read (D:\blog\node_modules\hexo\lib\hexo\router.js:47:5)</span><br><span class="line">    at Readable.read (node:internal/streams/readable:496:12)</span><br><span class="line">    at resume_ (node:internal/streams/readable:999:12)</span><br><span class="line">    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<h1 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h1><p>因为很久没更新 ，我第一时间想到的是不是因为node.js 和npm版本太老了？于是就更新了node.js 和npm。</p>
+<p>node.js更新我是去官网下载最新版安装包 。</p>
+<p>而npm更新则是用命令行更新。</p>
+<p>NPM更新到最新版命令：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h1><p>现在电脑上的node.js 和npm均是最新版了，但是hexo s后仍然报错，还是同样的ERROR，但是看到别人却成功了。于是分析了一下报错信息，</p>
+<p>发现了这几行东西：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Plugin load failed: hexo-butterfly-clock</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-butterfly-clock&#x27;       </span><br><span class="line">ERROR Plugin load failed: hexo-wordcount</span><br><span class="line">Error: ENOENT: no such file or directory, open &#x27;D:\blog\node_modules\hexo-wordcount&#x27;</span><br></pre></td></tr></table></figure></div>
+
+<p>就发现<strong>根本原因是hexo-butterfly-clock和hexo-wordcount这2个插件缺失</strong></p>
+<p>于是就立马下载插件</p>
+<h2 id="安装hexo-butterfly-clock"><a href="#安装hexo-butterfly-clock" class="headerlink" title="安装hexo-butterfly-clock"></a>安装hexo-butterfly-clock</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-butterfly-clock --save </span><br></pre></td></tr></table></figure></div>
+<p>或者</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-butterfly-clock --save</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="安装hexo-wordcount"><a href="#安装hexo-wordcount" class="headerlink" title="安装hexo-wordcount"></a>安装hexo-wordcount</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-wordcount --save</span><br></pre></td></tr></table></figure></div>
+<p>或者</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">cnpm install hexo-wordcount --save</span><br></pre></td></tr></table></figure></div>
+
+<p>到此，再次hexo s ，可发现问题已解决。</p>
+]]></content>
+      <tags>
+        <tag>博客</tag>
+        <tag>博客问题</tag>
       </tags>
   </entry>
 </search>
